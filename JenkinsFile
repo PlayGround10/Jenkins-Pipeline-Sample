@@ -54,9 +54,9 @@ pipeline {
             
             copyArtifacts filter: '\\ConsoleApp1\\bin\\Release\\net6.0\\**\\*.*', fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: env.BUILD_NUMBER, target: './archive_new'
         }
-        success {
+        // success {
             
-        }
+        // }
         // failure {
         //     // If build fails
         // }
