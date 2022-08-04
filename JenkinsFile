@@ -46,15 +46,17 @@ pipeline {
         }
     }
 
-    // post {
-    //     always {
-    //         // always execute after stages
-    //     }
-    //     success {
-    //         // if all build success
-    //     }
-    //     failure {
-    //         // If build fails
-    //     }
-    // }
+    post {
+        always {
+            // always execute after stages
+            archiveArtifacts artifacts:'\\ConsoleApp1\\bin\\Release\\net6.0\\**\\*.*', 
+			fingerprint:true
+        }
+        // success {
+        //     // if all build success
+        // }
+        // failure {
+        //     // If build fails
+        // }
+    }
 }
