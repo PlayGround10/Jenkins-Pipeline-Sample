@@ -42,6 +42,8 @@ pipeline {
         stage("variable persistance check")  {
             steps {
                 echo "FOO is ${env.FOO}"
+                archiveArtifacts artifacts:'\\ConsoleApp1\\bin\\Release\\net6.0\\**\\*.*', 
+			    fingerprint:true
             }
         }
     }
@@ -49,11 +51,11 @@ pipeline {
     post {
         always {
             // always execute after stages
-            archiveArtifacts artifacts:'\\ConsoleApp1\\bin\\Release\\net6.0\\**\\*.*', 
-			fingerprint:true
+            
+            copyArtifacts filter: '\\ConsoleApp1\\bin\\Release\\net6.0\\**\\*.*', fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: env.BUILD_NUMBER, target: './archive_new'
         }
         success {
-            copyArtifacts filter: '\\ConsoleApp1\\bin\\Release\\net6.0\\**\\*.*', fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: env.BUILD_NUMBER, target: './archive_new'
+            
         }
         // failure {
         //     // If build fails
