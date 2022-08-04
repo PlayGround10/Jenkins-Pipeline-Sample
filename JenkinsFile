@@ -1,11 +1,14 @@
 pipeline {
     agent any
 
+    environment {
+     FOO = "foo"
+   }
+
     stages {
         stage("build") {
             steps {
                 echo 'building the application...'
-                setPersistentEnv(key: "FOO", value: "abcd")
             }            
         }
 
