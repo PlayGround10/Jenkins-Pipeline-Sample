@@ -5,6 +5,7 @@ pipeline {
         stage("build") {
             steps {
                 echo 'building the application...'
+                setPersistentEnv(key: "FOO", value: "abcd")
             }            
         }
 
@@ -30,6 +31,12 @@ pipeline {
                 echo 'echo "Deploying the application"'
 
             }        
+        }
+
+        stage("variable persistance check")  {
+            steps {
+                echo "FOO is ${env.FOO}"
+            }
         }
     }
 
