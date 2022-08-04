@@ -9,15 +9,40 @@ pipeline {
         }
 
         stage("test") {
+            when {
+                expression {
+                    env.BRANCH_NAME == 'dev'
+                }
+            }
             steps {
                 echo 'testing the application'
             }
         }
 
         stage("deploy") {
-            steps {
-                echo 'deploying the application'
+            // steps {
+            //     echo 'deploying the application'
+            // }
+            input {
+                message "Do you want to proceed for  deployment?"
             }
+            steps {
+                sh 'echo "Deploying the application"'
+
+            }
+        }
+        }
+    }
+
+    post {
+        always {
+            // always execute after stages
+        }
+        success {
+            // if all build success
+        }
+        failure {
+            // If build fails
         }
     }
 }
