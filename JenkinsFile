@@ -52,7 +52,7 @@ pipeline {
         always {
             // always execute after stages
             
-            copyArtifacts  fingerprintArtifacts: true, target: './archive_new'
+            copyArtifacts  fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: env.BUILD_NUMBER, target: './archive_new'
         }
         // success {
             
