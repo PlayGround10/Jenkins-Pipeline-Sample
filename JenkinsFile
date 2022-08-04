@@ -33,15 +33,15 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            // always execute after stages
-        }
-        success {
-            // if all build success
-        }
-        failure {
-            // If build fails
-        }
-    }
+    // post {
+    //     always {
+    //         // always execute after stages
+    //     }
+    //     success {
+    //         // if all build success
+    //     }
+    //     failure {
+    //         // If build fails
+    //     }
+    // }
 }
