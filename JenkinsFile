@@ -9,6 +9,9 @@ pipeline {
         stage("build") {
             steps {
                 echo 'building the application...'
+
+                powershell label: "build the application",
+				script: ".\\build.ps1"
             }            
         }
 

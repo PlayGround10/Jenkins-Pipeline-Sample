@@ -1,0 +1,1 @@
+. dotnet build .\ConsoleApp1\ConsoleApp1.sln --configuration Release
