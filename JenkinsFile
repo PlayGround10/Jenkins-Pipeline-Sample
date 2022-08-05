@@ -52,8 +52,17 @@ pipeline {
         always {
             // always execute after stages
             
-           copyArtifacts filter: "${env.BUILD_NUMBER}.zip", fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: specific(env.BUILD_NUMBER), target: '\\promotion\\'
-            deleteDir()
+            copyArtifacts filter: "${env.BUILD_NUMBER}.zip", fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: specific(env.BUILD_NUMBER), target: '\\promotion\\'
+            deleteDir("${env.BUILD_NUMBER}.zip")
+            dir("${env.WORKSPACE}@tmp") {
+                deleteDir()
+            }
+            dir("${env.WORKSPACE}@script") {
+                deleteDir()
+            }
+            dir("${env.WORKSPACE}@script@tmp") {
+                deleteDir()
+            }
         }
         // success {
             
