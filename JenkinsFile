@@ -49,7 +49,7 @@ pipeline {
         }
     }
 
-    post {
+    // post {
         // always {
         //     // always execute after stages
             
@@ -70,5 +70,5 @@ pipeline {
         // failure {
         //     // If build fails
         // }
-    }
+    // }
 }
