@@ -42,7 +42,7 @@ pipeline {
         stage("variable persistance check")  {
             steps {
                 echo "FOO is ${env.FOO}"
-                zip archive: true, dir: '\\ConsoleApp1\\bin\\Release\\net6.0\\**\*.*', glob: '', zipFile: "${specific(env.BUILD_NUMBER)}.zip"
+                zip archive: true, dir: '\\ConsoleApp1\\bin\\Release\\net6.0\\**\\*.*', glob: '', zipFile: "${specific(env.BUILD_NUMBER)}.zip"
                 archiveArtifacts artifacts: "${specific(env.BUILD_NUMBER)}.zip", 
 			    fingerprint:true
             }
