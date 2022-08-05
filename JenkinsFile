@@ -42,8 +42,8 @@ pipeline {
         stage("variable persistance check")  {
             steps {
                 echo "FOO is ${env.FOO}"
-                zip archive: true, dir: '\\ConsoleApp1\\bin\\Release\\net6.0\\',  zipFile: "${env.BUILD_NUMBER}.zip" // Create zip and then archive as artifact
-                // archiveArtifacts artifacts: "${env.BUILD_NUMBER}.zip", fingerprint:true
+                zip archive: false, dir: '\\ConsoleApp1\\bin\\Release\\net6.0\\',  zipFile: "${env.BUILD_NUMBER}.zip" // Create zip and then archive as artifact
+                archiveArtifacts artifacts: "${env.BUILD_NUMBER}.zip", fingerprint:true
             }
         }
     }
@@ -53,6 +53,7 @@ pipeline {
             // always execute after stages
             
            copyArtifacts filter: "${env.BUILD_NUMBER}.zip", fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: specific(env.BUILD_NUMBER), target: '\\promotion\\'
+            deleteDir()
         }
         // success {
             
