@@ -43,7 +43,7 @@ pipeline {
             steps {
                 echo "FOO is ${env.FOO}"
                 zip archive: false, dir: '\\ConsoleApp1\\bin\\Release\\net6.0\\',  zipFile: "\\tmp\\${env.BUILD_NUMBER}.zip" // Create zip and then archive as artifact
-                archiveArtifacts artifacts: "tmp\\${env.BUILD_NUMBER}.zip", fingerprint:true
+                archiveArtifacts artifacts: "tmp\\${env.BUILD_NUMBER}.zip", fingerprint:false
             }
         }
     }
@@ -52,7 +52,7 @@ pipeline {
         always {
             // always execute after stages
             
-            copyArtifacts filter: "tmp\\${env.BUILD_NUMBER}.zip", fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: specific(env.BUILD_NUMBER), target: '\\promotion\\'
+            copyArtifacts filter: "tmp\\${env.BUILD_NUMBER}.zip", fingerprintArtifacts: false, projectName: env.JOB_NAME, selector: specific(env.BUILD_NUMBER), target: '\\promotion\\'
             
             dir("tmp") {
                 deleteDir()
