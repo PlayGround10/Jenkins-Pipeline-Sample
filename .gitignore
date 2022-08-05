@@ -6,3 +6,5 @@
 /ConsoleApp1/.vs/ConsoleApp1
 /ConsoleApp1/bin/Debug/net6.0
 /ConsoleApp1/obj
+.vscode/launch.json
+.vscode/tasks.json
