@@ -42,32 +42,23 @@ pipeline {
         stage("variable persistance check")  {
             steps {
                 echo "FOO is ${env.FOO}"
-                zip archive: true, dir: '\\ConsoleApp1\\bin\\Release\\net6.0\\', glob: '', zipFile: "${env.BUILD_NUMBER}.zip"
+                zip archive: true, dir: '\\ConsoleApp1\\bin\\Release\\net6.0\\',  zipFile: "${env.BUILD_NUMBER}.zip" // Create zip and then archive as artifact
                 // archiveArtifacts artifacts: "${env.BUILD_NUMBER}.zip", fingerprint:true
             }
         }
     }
 
-    // post {
-        // always {
-        //     // always execute after stages
+    post {
+        always {
+            // always execute after stages
             
-        //     // copyArtifacts {
-						
-		// 	// 			flatten(true) //Note that we preserve the directory structure here so as to keep nunit exe in it's own directory structure.  But note that "Jenkins" will be a subfolder, so the PS1 need to cater for that
-
-		// 	// 			optional(false)
-		// 	// 			buildSelector {
-		// 	// 				buildNumber( '\${PROMOTED_NUMBER}' )
-		// 	// 			}
-		// 	// 			targetDirectory("PromotionWorkDir")
-		// 	// 		} //copyArtifacts
-        // }
+           copyArtifacts filter: "${env.BUILD_NUMBER}.zip", fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: specific(env.BUILD_NUMBER), target: '\\promotion\\'
+        }
         // success {
             
         // }
         // failure {
         //     // If build fails
         // }
-    // }
+    }
 }
